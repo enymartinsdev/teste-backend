@@ -1,15 +1,11 @@
-/*
-Classe em TypeScript
-Crie uma classe em TypeScript que ao ser instanciada, receba em seu construtor
-uma string de data em formato "HH:mm:ss DD/MM/YYYY".
-Trate os possíveis erros ao instanciar.
-Em seguida, adicione os métodos getUnix() e getDatetime()
-que retornam a data utilizada na construção em formato UNIX
-ou 'YYYY-MM-DD HH:mm:ss' respectivamente.
-*/
-// ✅ Format using reusable function
+//Crie uma classe em TypeScript que ao ser instanciada, 
+//receba em seu construtor uma string de data em formato "HH:mm:ss DD/MM/YYYY". 
+//Trate os possíveis erros ao instanciar. 
+//Em seguida, adicione os métodos getUnix() e getDatetime()
+//que retornam a data utilizada na construção em formato UNIX ou 'YYYY-MM-DD HH:mm:ss' respectivamente.
+// Format using reusable function
 function padTo2Digits(num) {
-    return num.toString().padStart(2, '0');
+    return num.toString().padStart(2, '0'); //every time will be with 2 digits, even when 01:00:00
 }
 // format as "hh:mm:ss YYYY-MM-DD "
 function formatDate(date) {
@@ -31,29 +27,29 @@ var GetTheDate = /** @class */ (function () {
     }
     GetTheDate.prototype.getUnix = function () {
         this.date = formatDate(new Date());
-        console.log("data-formatada", "".concat(this.date));
         var _a = this.date.split(' '), getHours = _a[0], getData = _a[1];
-        console.log("data", getData, "horas", getHours);
         var _b = getData.split('/'), day = _b[0], month = _b[1], year = _b[2];
         var _c = getHours.split(':'), hours = _c[0], minutes = _c[1], seconds = _c[2];
-        console.log("horinhas", hours);
         var date = new Date(+year, +month - 1, +day, +hours, +minutes, +seconds);
-        console.log("aparecendo aqui após o newDate", date);
         var timestampInMs = date.getTime();
         console.log("min", timestampInMs);
         var timestampInSeconds = Math.floor(date.getTime() / 1000); //unix mode
-        console.log("unixxxx", timestampInSeconds);
+        console.log("unix", timestampInSeconds);
     };
     GetTheDate.prototype.getDateTime = function () {
-        this.date = formatDate(new Date());
+        var formatedDate = formatDate(new Date());
+        this.date = formatedDate;
         var _a = this.date.split(' '), getHours = _a[0], getData = _a[1];
-        var _b = getData.split('/'), year = _b[0], month = _b[1], day = _b[2];
-        var result = getData + ' ' + getHours;
-        console.log(result);
-        return result;
+        var dia = getData.split("/")[0];
+        var mes = getData.split("/")[1];
+        var ano = getData.split("/")[2];
+        console.log("day", dia, "mes", mes, "ANO", ano);
+        var formatedYearFirst = ano + '-' + mes + '-' + dia;
+        console.log("finalResult", formatedYearFirst + ' ' + getHours);
+        return formatedYearFirst;
     };
     return GetTheDate;
 }());
-var data = new GetTheDate();
-data.getUnix();
-data.getDateTime();
+var getDates = new GetTheDate();
+getDates.getUnix();
+getDates.getDateTime();

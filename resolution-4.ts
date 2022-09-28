@@ -1,16 +1,12 @@
-/*
-Classe em TypeScript
-Crie uma classe em TypeScript que ao ser instanciada, receba em seu construtor 
-uma string de data em formato "HH:mm:ss DD/MM/YYYY". 
-Trate os possíveis erros ao instanciar. 
-Em seguida, adicione os métodos getUnix() e getDatetime() 
-que retornam a data utilizada na construção em formato UNIX 
-ou 'YYYY-MM-DD HH:mm:ss' respectivamente.
-*/
+//Crie uma classe em TypeScript que ao ser instanciada, 
+//receba em seu construtor uma string de data em formato "HH:mm:ss DD/MM/YYYY". 
+//Trate os possíveis erros ao instanciar. 
+//Em seguida, adicione os métodos getUnix() e getDatetime()
+//que retornam a data utilizada na construção em formato UNIX ou 'YYYY-MM-DD HH:mm:ss' respectivamente.
 
-// ✅ Format using reusable function
+// Format using reusable function
 function padTo2Digits(num: number) {
-    return num.toString().padStart(2, '0');
+    return num.toString().padStart(2, '0'); //every time will be with 2 digits, even when 01:00:00
 }
 
 // format as "hh:mm:ss YYYY-MM-DD "
@@ -30,38 +26,50 @@ function formatDate(date: Date) {
     )
 }
 
+
+
 class GetTheDate {
     date: string
 
     constructor() {
         this.date = formatDate(new Date())
     }
+
     getUnix(): void {
         this.date = formatDate(new Date())
-        console.log("data-formatada", `${this.date}`)
+
         let [getHours, getData] = this.date.split(' ')
-        console.log("data", getData, "horas", getHours)
 
         const [day, month, year] = getData.split('/');
         const [hours, minutes, seconds] = getHours.split(':');
-        console.log("horinhas", hours)
 
         const date = new Date(+year, +month - 1, +day, +hours, +minutes, +seconds);
-        console.log("aparecendo aqui após o newDate", date)
 
         const timestampInMs = date.getTime();
         console.log("min", timestampInMs)
 
         const timestampInSeconds = Math.floor(date.getTime() / 1000); //unix mode
-        console.log("unixxxx", timestampInSeconds)
+        console.log("unix", timestampInSeconds)
     }
 
-    getDateTime(): void {
-        //TODO
+    getDateTime(): string {
+        const formatedDate = formatDate(new Date())
+        this.date = formatedDate
+
+        let [getHours, getData] = this.date.split(' ')
+
+        let dia = getData.split("/")[0];
+        let mes = getData.split("/")[1];
+        let ano = getData.split("/")[2];
+        console.log("day", dia, "mes", mes, "ANO", ano)
+
+        const formatedYearFirst = ano + '-' + mes + '-' + dia
+        console.log("finalResult", formatedYearFirst + ' ' + getHours)
+        return formatedYearFirst
     }
 
 }
 
-let data = new GetTheDate()
-data.getUnix()
-data.getDateTime()
+let getDates = new GetTheDate()
+getDates.getUnix()
+getDates.getDateTime()
