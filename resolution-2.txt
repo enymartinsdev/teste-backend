@@ -1,0 +1,12 @@
+//segunda questão
+Detecção de erros
+Considere o seguinte repositório contendo uma implementação básica 
+de serviço CRUD: https://gitlab.com/sossego/teste-pratico-crud. 
+Analisando o projeto como um todo, identifique as falhas / problemas.
+
+Respostas:
+    1 - arquivo .env não listado no .gitignore. Uma boa prática seria ter um env.example ao invés dele;
+    2 - ideal colocar o node_modules em .gitignore. Não há necessidade de subir em um repositório todas essas dependências
+    3 - no arquivo crud.js imagino não haver necessidade de usar return await, tendo em vista que não estamos utilizando um try catch
+    4 - req.body é utilizado somente em rotas put, post, mas na api está presente nas rotas get e delete
+

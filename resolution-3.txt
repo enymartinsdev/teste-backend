@@ -1,0 +1,12 @@
+
+API REST
+Imagine que você está projetando uma API REST, no contexto de uma pizzaria online. 
+Sua tarefa é definir as rotas que suportam o catálogo de produtos no site/aplicativo. 
+Quais seriam elas? (basta listar as rotas, não precisa especificar os payloads)
+
+
+GET produtos/:id - buscar um produto pelo id
+GET produtos/ - buscar todos os produtos do catálogo
+POST produtos/insert - inserir um produto no catálogo
+PATCH produtos/:id - atualizar um dado em um produto específico 
+(utilizar mesmo endpoint para atualizar os is_active, fazendo uma exclusão lógica do produto)
