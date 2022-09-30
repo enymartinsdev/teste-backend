@@ -5,8 +5,8 @@
 -- Monte uma query em SQL que retorne as 
 -- vendas mensais de cada produto (mes, produto, qtde, valor total).
 
-SELECT data, produto.nome, sum(qtde) as "quantity", sum(valor) as "total" from vendas
-LEFT JOIN produto
+select data, produto.nome, sum(qtde) as "quantity", sum(valor) as "total" from vendas
+left join produto
 on produto.id = vendas.produto_id
-WHERE month(data) = 8
-GROUP BY 2
+group by produto.nome, data
+order by produto.nome, data;
